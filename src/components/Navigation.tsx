@@ -52,6 +52,14 @@ export default function Navigation() {
               <NavLink href="/yazim-kurallari">Yazım Kuralları</NavLink>
               <NavLink href="/noktalama-isaretleri">Noktalama İşaretleri</NavLink>
               <NavLink href="/atasozleri">Atasözleri ve Deyimler</NavLink>
+              <NavLink href="/yol-haritasi">
+                <span className="inline-flex items-center">
+                  Yol Haritası
+                  <span className="ml-1 px-1.5 py-0.5 text-[10px] font-medium bg-orange-100 text-orange-600 rounded-full">
+                    Yeni
+                  </span>
+                </span>
+              </NavLink>
             </div>
           </div>
         </div>
@@ -90,6 +98,14 @@ export default function Navigation() {
               </MobileNavLink>
               <MobileNavLink href="/atasozleri" onClick={() => setIsMenuOpen(false)}>
                 Atasözleri ve Deyimler
+              </MobileNavLink>
+              <MobileNavLink href="/yol-haritasi" onClick={() => setIsMenuOpen(false)}>
+                <span className="inline-flex items-center">
+                  Yol Haritası
+                  <span className="ml-1 px-1.5 py-0.5 text-[10px] font-medium bg-orange-100 text-orange-600 rounded-full">
+                    Yeni
+                  </span>
+                </span>
               </MobileNavLink>
             </div>
           </div>

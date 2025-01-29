@@ -1,6 +1,7 @@
 import SearchBox from '@/components/SearchBox';
 import YanlisYazimlar from '@/components/YanlisYazimlar';
 import GununAtasozu from '@/components/GununAtasozu';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -47,13 +48,29 @@ export default function Home() {
       <div className="container mx-auto px-4 py-12 relative">
         {/* Bilgilendirme */}
         <div className="mb-8 text-center">
-          <div className="inline-flex items-center gap-2 bg-white/80 px-4 py-2 rounded-full border border-orange-100 shadow-sm backdrop-blur-sm">
-            <svg className="w-5 h-5 text-orange-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <p className="text-sm text-orange-600">
-              Bu proje test aşamasındadır. İçerik ve özellik iyileştirmeleri devam etmektedir.
-            </p>
+          <div className="inline-flex flex-col sm:flex-row items-center gap-2 bg-gradient-to-r from-orange-50 to-white px-6 py-3 rounded-2xl border border-orange-100 shadow-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <p className="text-sm text-orange-600 font-medium">
+                Bu proje test aşamasındadır. İçerik ve özellik iyileştirmeleri devam etmektedir.
+              </p>
+            </div>
+            <Link 
+              href="/yol-haritasi" 
+              className="group flex items-center gap-1.5 px-4 py-1.5 bg-white text-sm text-orange-600 hover:text-orange-700 rounded-full border border-orange-100 transition-all hover:shadow-sm"
+            >
+              <span className="text-lg">🚀</span>
+              <span className="font-medium group-hover:underline decoration-dotted">
+                Yol haritasını incele
+              </span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
         </div>
 
