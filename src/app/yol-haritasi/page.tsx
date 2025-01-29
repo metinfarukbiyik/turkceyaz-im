@@ -25,22 +25,22 @@ export default function YolHaritasi() {
                 {
                   title: "Ana Sayfa Tasarımı",
                   description: "Modern ve kullanıcı dostu bir arayüz ile ana sayfa tasarımı tamamlandı.",
-                  date: "Mart 2024"
+                  date: "Ocak 2025"
                 },
                 {
                   title: "TDK API Entegrasyonu",
                   description: "Türk Dil Kurumu sözlük API'si entegre edildi ve kelime arama özelliği eklendi.",
-                  date: "Mart 2024"
+                  date: "Ocak 2025"
                 },
                 {
                   title: "Sık Yapılan Yanlışlar",
                   description: "Sık yapılan yazım yanlışları ve doğru kullanımları eklendi.",
-                  date: "Mart 2024"
+                  date: "Ocak 2025"
                 },
                 {
                   title: "Günün Atasözü",
                   description: "Her gün farklı bir atasözü ve anlamı gösteriliyor.",
-                  date: "Mart 2024"
+                  date: "Ocak 2025"
                 }
               ].map((item, index) => (
                 <div key={index} className="bg-white p-4 rounded-xl border border-green-100">
@@ -109,12 +109,12 @@ export default function YolHaritasi() {
                 {
                   title: "Alıştırmalar ve Testler",
                   description: "Yazım ve noktalama kuralları için interaktif alıştırmalar.",
-                  eta: "2024 Q2"
+                  eta: "2025 Q1"
                 },
                 {
                   title: "Dark Mode",
                   description: "Koyu tema desteği.",
-                  eta: "2024 Q3"
+                  eta: "2025 Q1"
                 }
               ].map((item, index) => (
                 <div key={index} className="bg-white p-4 rounded-xl border border-blue-100">
