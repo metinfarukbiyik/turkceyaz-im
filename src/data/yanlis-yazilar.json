@@ -1,40 +1,208 @@
 {
   "yanlis_yazimlar": [
-    {"yanlis": "herhangibir", "dogru": "herhangi bir", "aciklama": "Belgisiz sıfat olan 'herhangi' ile 'bir' sözcüğü her zaman ayrı yazılır. Örnek: 'Herhangi bir sorun var mı?'"},
-    {"yanlis": "birşey", "dogru": "bir şey", "aciklama": "'Bir şey' sözcüğü, belgisiz zamir olarak kullanıldığında her zaman ayrı yazılır. 'Hiçbir şey' de aynı kurala tabidir."},
-    {"yanlis": "heryer", "dogru": "her yer", "aciklama": "'Her' sözcüğü sıfat görevinde kullanıldığında kendinden sonraki sözcükten ayrı yazılır. Örnek: her gün, her zaman, her yer."},
-    {"yanlis": "yapabilirmiyim", "dogru": "yapabilir miyim?", "aciklama": "Soru eki 'mı/mi/mu/mü' her zaman ayrı yazılır ve kendinden önceki sözcükten ayrılır. Soru işareti de unutulmamalıdır."},
-    {"yanlis": "şuan", "dogru": "şu an", "aciklama": "'Şu' işaret sıfatı ile zaman bildiren 'an' sözcüğü her zaman ayrı yazılır. Örnek: 'Şu an müsait değilim.'"},
-    {"yanlis": "birkaçtane", "dogru": "birkaç tane", "aciklama": "'Birkaç' belgisiz sıfatı tek sözcük olarak yazılır, ancak 'tane' sözcüğü her zaman ayrı yazılır. Örnek: 'Birkaç tane elma al.'"},
-    {"yanlis": "dışarıçıkmak", "dogru": "dışarı çıkmak", "aciklama": "Birleşik fiiller, yardımcı fiillerle kullanıldığında ayrı yazılır. Örnek: yardım etmek, dans etmek, dışarı çıkmak."},
-    {"yanlis": "başüstüne", "dogru": "baş üstüne", "aciklama": "Kalıplaşmamış saygı ve nezaket ifadeleri ayrı yazılır. Örnek: 'Baş üstüne efendim.'"},
-    {"yanlis": "görüşmeküzere", "dogru": "görüşmek üzere", "aciklama": "'Üzere' sözcüğü edat olarak kullanıldığında kendinden önceki sözcükten ayrı yazılır. Örnek: 'Gelmek üzere, yapmak üzere.'"},
-    {"yanlis": "tabiki", "dogru": "tabii ki", "aciklama": "'Tabii' sözcüğünün doğru yazımı iki 'i' iledir ve 'ki' bağlacı her zaman ayrı yazılır. Örnek: 'Tabii ki geleceğim.'"},
-    {"yanlis": "herşey", "dogru": "her şey", "aciklama": "'Her' sıfatı ile 'şey' ismi ayrı yazılır. Bu kural tüm 'her' ile başlayan sıfat tamlamalarında geçerlidir."},
-    {"yanlis": "sanırımki", "dogru": "sanırım ki", "aciklama": "Cümle başında veya ortasında kullanılan 'ki' bağlacı her zaman ayrı yazılır. Örnek: 'Biliyorum ki', 'sanırım ki', 'dedim ki'."},
-    {"yanlis": "farketmek", "dogru": "fark etmek", "aciklama": "Yardımcı fiillerle (etmek, olmak, eylemek) kurulan birleşik fiiller ayrı yazılır. Örnek: 'fark etmek', 'dans etmek'."},
-    {"yanlis": "olabilirmi", "dogru": "olabilir mi?", "aciklama": "Soru eki 'mi' her zaman ayrı yazılır ve soru işareti konur. Ek, kendinden önceki sözcüğün son ünlüsüne göre uyum sağlar."},
-    {"yanlis": "çokmu", "dogru": "çok mu?", "aciklama": "Soru eki 'mu' her zaman ayrı yazılır."},
-    {"yanlis": "yanlız", "dogru": "yalnız", "aciklama": "'Yalnız' sözcüğünün doğru yazımı 'n' harfi iledir. 'Yanlış' sözcüğüyle karıştırılmamalıdır."},
-    {"yanlis": "nerde", "dogru": "nerede", "aciklama": "Soru zarfı olan 'nerede' sözcüğünün doğru yazımı 'e' harfi iledir. Konuşma dilindeki kısaltmalar yazı dilinde kullanılmaz."},
-    {"yanlis": "gayri resmi", "dogru": "gayriresmi", "aciklama": "'Gayri' ön eki, kendinden sonraki sözcükle bitişik yazılır. Örnek: gayriresmi, gayrimenkul, gayrisafi."},
-    {"yanlis": "bilmiyormusun", "dogru": "bilmiyor musun?", "aciklama": "Soru eki 'mu' her zaman ayrı yazılır."},
-    {"yanlis": "geldimi", "dogru": "geldi mi?", "aciklama": "Soru eki 'mi' her zaman ayrı yazılır."},
-    {"yanlis": "gidiyormusun", "dogru": "gidiyor musun?", "aciklama": "Soru eki 'mu' her zaman ayrı yazılır."},
-    {"yanlis": "olacakmı", "dogru": "olacak mı?", "aciklama": "Soru eki 'mı' her zaman ayrı yazılır."},
-    {"yanlis": "seviyormusun", "dogru": "seviyor musun?", "aciklama": "Soru eki 'mu' her zaman ayrı yazılır."},
-    {"yanlis": "konuştunmu", "dogru": "konuştun mu?", "aciklama": "Soru eki 'mu' her zaman ayrı yazılır."},
-    {"yanlis": "biliyormusun", "dogru": "biliyor musun?", "aciklama": "Soru eki 'mu' her zaman ayrı yazılır."},
-    {"yanlis": "başardınmı", "dogru": "başardın mı?", "aciklama": "Soru eki 'mı' her zaman ayrı yazılır."},
-    {"yanlis": "hataen", "dogru": "hatayen", "aciklama": "Doğru yazımı 'hatayen' şeklindedir."},
-    {"yanlis": "hiçbirşey", "dogru": "hiçbir şey", "aciklama": "'Hiçbir' ve 'şey' kelimeleri ayrı yazılır."},
-    {"yanlis": "hertürlü", "dogru": "her türlü", "aciklama": "'Her' kelimesi kendinden sonraki kelimeden ayrı yazılır."},
-    {"yanlis": "gidicem", "dogru": "gideceğim", "aciklama": "Konuşma dilindeki kısaltmalar yazı dilinde kullanılmaz. Gelecek zaman eki '-ecek/-acak' ve şahıs eki birlikte kullanılır."},
-    {"yanlis": "gelicem", "dogru": "geleceğim", "aciklama": "Konuşma dilindeki kısaltma yerine doğru fiil çekimi kullanılmalıdır."},
-    {"yanlis": "güzelmi", "dogru": "güzel mi?", "aciklama": "Soru eki 'mi' her zaman ayrı yazılır."},
-    {"yanlis": "kötümü", "dogru": "kötü mü?", "aciklama": "Soru eki 'mü' her zaman ayrı yazılır."},
-    {"yanlis": "zorlamı", "dogru": "zorla mı?", "aciklama": "Soru eki 'mı' her zaman ayrı yazılır."},
-    {"yanlis": "gelebilirmisin", "dogru": "gelebilir misin?", "aciklama": "Soru eki 'mi' ve şahıs eki her zaman ayrı yazılır."},
-    {"yanlis": "gördünmü", "dogru": "gördün mü?", "aciklama": "Soru eki 'mü' her zaman ayrı yazılır."}
+    {
+      "yanlis": "herhangibir",
+      "dogru": "herhangi bir",
+      "aciklama": "Belgisiz sıfat olan 'herhangi' ile 'bir' sözcüğü her zaman ayrı yazılır.",
+      "kategori": "bitisik_yazim"
+    },
+    {
+      "yanlis": "birşey",
+      "dogru": "bir şey",
+      "aciklama": "'Bir şey' sözcüğü, belgisiz zamir olarak kullanıldığında her zaman ayrı yazılır. 'Hiçbir şey' de aynı kurala tabidir.",
+      "kategori": "bitisik_yazim"
+    },
+    {
+      "yanlis": "heryer",
+      "dogru": "her yer",
+      "aciklama": "'Her' sözcüğü sıfat görevinde kullanıldığında kendinden sonraki sözcükten ayrı yazılır.",
+      "kategori": "bitisik_yazim"
+    },
+    {
+      "yanlis": "hiçbirşey",
+      "dogru": "hiçbir şey",
+      "aciklama": "'Hiçbir' ve 'şey' kelimeleri ayrı yazılır.",
+      "kategori": "bitisik_yazim"
+    },
+    {
+      "yanlis": "hoşçakal",
+      "dogru": "hoşça kal",
+      "aciklama": "Kalıplaşmış bu vedalaşma sözü ayrı yazılır.",
+      "kategori": "bitisik_yazim"
+    },
+    {
+      "yanlis": "herzaman",
+      "dogru": "her zaman",
+      "aciklama": "'Her' sözcüğü kendinden sonraki kelimeden ayrı yazılır.",
+      "kategori": "bitisik_yazim"
+    },
+    {
+      "yanlis": "hergün",
+      "dogru": "her gün",
+      "aciklama": "'Her' sözcüğü kendinden sonraki kelimeden ayrı yazılır.",
+      "kategori": "bitisik_yazim"
+    },
+    {
+      "yanlis": "herşey",
+      "dogru": "her şey",
+      "aciklama": "'Her' sıfatı ile 'şey' ismi ayrı yazılır.",
+      "kategori": "bitisik_yazim"
+    },
+    {
+      "yanlis": "yanlız",
+      "dogru": "yalnız",
+      "aciklama": "'Yalnız' sözcüğünün doğru yazımı 'n' harfi iledir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "sarımsak",
+      "dogru": "sarımsak",
+      "aciklama": "Bu sözcüğün yazımı TDK'ye göre 'sarımsak' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "klavye",
+      "dogru": "klavye",
+      "aciklama": "Bu sözcüğün yazımı TDK'ye göre 'klavye' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "labaratuar",
+      "dogru": "laboratuvar",
+      "aciklama": "Bu sözcüğün doğru yazımı 'laboratuvar' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "traş",
+      "dogru": "tıraş",
+      "aciklama": "Bu sözcüğün doğru yazımı 'tıraş' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "şöför",
+      "dogru": "şoför",
+      "aciklama": "Bu sözcüğün doğru yazımı 'şoför' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "mütahit",
+      "dogru": "müteahhit",
+      "aciklama": "Bu sözcüğün doğru yazımı 'müteahhit' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "proğram",
+      "dogru": "program",
+      "aciklama": "Bu sözcüğün doğru yazımı 'program' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "yapabilirmiyim",
+      "dogru": "yapabilir miyim",
+      "aciklama": "Soru eki 'mı/mi/mu/mü' her zaman ayrı yazılır.",
+      "kategori": "soru_eki"
+    },
+    {
+      "yanlis": "gelecekmisin",
+      "dogru": "gelecek misin",
+      "aciklama": "Soru eki 'mı/mi/mu/mü' her zaman ayrı yazılır.",
+      "kategori": "soru_eki"
+    },
+    {
+      "yanlis": "buldunmu",
+      "dogru": "buldun mu",
+      "aciklama": "Soru eki 'mı/mi/mu/mü' her zaman ayrı yazılır.",
+      "kategori": "soru_eki"
+    },
+    {
+      "yanlis": "olurmu",
+      "dogru": "olur mu",
+      "aciklama": "Soru eki 'mı/mi/mu/mü' her zaman ayrı yazılır.",
+      "kategori": "soru_eki"
+    },
+    {
+      "yanlis": "şuan",
+      "dogru": "şu an",
+      "aciklama": "'Şu' işaret sıfatı ile zaman bildiren 'an' sözcüğü her zaman ayrı yazılır.",
+      "kategori": "bitisik_yazim"
+    },
+    {
+      "yanlis": "herkez",
+      "dogru": "herkes",
+      "aciklama": "Bu sözcüğün doğru yazımı 'herkes' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "yalnış",
+      "dogru": "yanlış",
+      "aciklama": "Bu sözcüğün doğru yazımı 'yanlış' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "dinazor",
+      "dogru": "dinozor",
+      "aciklama": "Bu sözcüğün doğru yazımı 'dinozor' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "orjinal",
+      "dogru": "orijinal",
+      "aciklama": "Bu sözcüğün doğru yazımı 'orijinal' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "makina",
+      "dogru": "makine",
+      "aciklama": "Bu sözcüğün doğru yazımı 'makine' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "eşortman",
+      "dogru": "eşofman",
+      "aciklama": "Bu sözcüğün doğru yazımı 'eşofman' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "kompling",
+      "dogru": "komple",
+      "aciklama": "Bu sözcüğün doğru yazımı 'komple' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "meyva",
+      "dogru": "meyve",
+      "aciklama": "Bu sözcüğün doğru yazımı 'meyve' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "acenta",
+      "dogru": "acente",
+      "aciklama": "Bu sözcüğün doğru yazımı 'acente' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "döküman",
+      "dogru": "doküman",
+      "aciklama": "Bu sözcüğün doğru yazımı 'doküman' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "mazeret",
+      "dogru": "mazeretim",
+      "aciklama": "Bu sözcüğün doğru yazımı 'mazeret' şeklindedir.",
+      "kategori": "yanlis_harf"
+    },
+    {
+      "yanlis": "teşekkürler",
+      "dogru": "teşekkür ederim",
+      "aciklama": "'Teşekkürler' yerine 'teşekkür ederim' kullanımı daha doğrudur.",
+      "kategori": "kullanim"
+    },
+    {
+      "yanlis": "değilmi",
+      "dogru": "değil mi",
+      "aciklama": "Soru eki 'mı/mi/mu/mü' her zaman ayrı yazılır.",
+      "kategori": "soru_eki"
+    }
   ]
 } 

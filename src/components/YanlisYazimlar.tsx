@@ -1,101 +1,163 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { searchWord } from '@/lib/tdk-api';
-import yanlis_yazimlar from '@/data/yanlis-yazilar.json';
-
-// Tip tanımlamaları
-interface YanlisYazim {
-  yanlis: string;
-  dogru: string;
-  aciklama: string;
-}
-
-interface YanlisYazimlar {
-  yanlis_yazimlar: YanlisYazim[];
-}
+import { 
+  YazimYanlisiKategori, 
+  getSikcaYapilanYanlislar,
+  getKategoriIstatistikleri,
+  getKategori,
+  type YanlisKullanimResponse 
+} from '@/lib/tdk-api';
 
 export default function YanlisYazimlar() {
-  const [randomItem, setRandomItem] = useState<YanlisYazim | null>(null);
-  const [anlam, setAnlam] = useState<string | null>(null);
+  const [rastgeleYanlis, setRastgeleYanlis] = useState<YanlisKullanimResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showCopied, setShowCopied] = useState(false);
 
-  const getRandomItem = async () => {
-    const randomIndex = Math.floor(Math.random() * yanlis_yazimlar.yanlis_yazimlar.length);
-    const item = yanlis_yazimlar.yanlis_yazimlar[randomIndex];
-    setRandomItem(item);
+  useEffect(() => {
+    yeniYanlisGetir();
+  }, []);
 
-    // Doğru kelimenin anlamını TDK API'den al
+  const yeniYanlisGetir = async () => {
+    setIsLoading(true);
     try {
-      const data = await searchWord(item.dogru.split(" ")[0]); // İlk kelimeyi ara
-      if (data && data.length > 0 && data[0].anlamlarListe) {
-        setAnlam(data[0].anlamlarListe[0].anlam);
-      } else {
-        setAnlam(null);
-      }
-    } catch {
-      setAnlam(null);
+      const tumYanlislar = await getSikcaYapilanYanlislar();
+      const rastgeleIndex = Math.floor(Math.random() * tumYanlislar.length);
+      setRastgeleYanlis(tumYanlislar[rastgeleIndex]);
+    } catch (error) {
+      console.error('Veri yükleme hatası:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  useEffect(() => {
-    getRandomItem();
-  }, []); // Sadece bileşen yüklendiğinde çalışır
-
-  if (!randomItem) return null;
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setShowCopied(true);
+    setTimeout(() => setShowCopied(false), 2000);
+  };
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-orange-100/50 h-full">
       <div className="p-6 flex flex-col h-full">
-        {/* Başlık */}
+        {/* Başlık ve Yenileme Butonu */}
         <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-2">
-            <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            <h2 className="text-xl font-semibold text-orange-600">
-              Sık Yapılan Yazım Yanlışı
-            </h2>
+          <div className="flex items-center gap-3">
+            <div className="bg-orange-100 p-2 rounded-xl">
+              <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold text-orange-700">
+                Sıkça Yapılan Yazım Yanlışları
+              </h2>
+              <p className="text-sm text-orange-500 mt-0.5">
+                Türk Dil Kurumu Sözlüğü'nden
+              </p>
+            </div>
           </div>
-          <button 
-            onClick={getRandomItem}
-            className="text-orange-500 hover:text-orange-600 transition-colors p-2 hover:bg-orange-50 rounded-lg"
-            title="Yeni kelime göster"
+          
+          {/* Yenileme Butonu */}
+          <button
+            onClick={yeniYanlisGetir}
+            className="p-2 hover:bg-orange-50 text-orange-600 rounded-xl border border-orange-200 transition-colors"
+            title="Yeni Yazım Yanlışı Göster"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
           </button>
         </div>
-        
-        {/* Kelimeler - Yeni Grid Yapısı */}
-        <div className="flex-grow">
-          <div className="grid grid-cols-2 gap-4">
-            {/* Yanlış Kelime */}
-            <div className="p-4 bg-red-50 rounded-xl flex flex-col justify-center items-center border border-red-100">
-              <span className="text-sm text-red-400 mb-2">Yanlış Kullanım</span>
-              <span className="text-xl text-red-500 line-through font-medium">{randomItem.yanlis}</span>
-            </div>
-            
-            {/* Doğru Kelime */}
-            <div className="p-4 bg-green-50 rounded-xl flex flex-col justify-center items-center border border-green-100">
-              <span className="text-sm text-green-500 mb-2">Doğru Kullanım</span>
-              <span className="text-xl text-green-600 font-medium">{randomItem.dogru}</span>
+
+        {/* Yazım Yanlışı Kartı */}
+        {isLoading ? (
+          <div className="flex-grow flex justify-center items-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+          </div>
+        ) : rastgeleYanlis ? (
+          <div className="flex-grow">
+            <div className="bg-orange-50/50 rounded-xl border border-orange-100 overflow-hidden hover:shadow-md transition-shadow">
+              <div className="p-6">
+                <div className="flex flex-col gap-4">
+                  <div className="text-sm px-3 py-1 rounded-full bg-orange-100 text-orange-700 font-medium self-end">
+                    {getKategori(rastgeleYanlis.id)}
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-6">
+                    {/* Yanlış Kullanım */}
+                    <div className="flex flex-col gap-2 bg-red-50/50 p-4 rounded-xl border border-red-100">
+                      <div className="flex items-center gap-2 text-red-600 mb-1">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        <span className="text-sm font-medium">Yanlış Kullanım</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="text-red-500 text-2xl font-medium">
+                          {rastgeleYanlis.yanlis}
+                        </div>
+                        <button
+                          onClick={() => handleCopy(rastgeleYanlis.yanlis)}
+                          className="text-red-400 hover:text-red-600 transition-colors hover:bg-red-100/50 p-1 rounded-lg"
+                          title="Kopyala"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Doğru Kullanım */}
+                    <div className="flex flex-col gap-2 bg-green-50/50 p-4 rounded-xl border border-green-100">
+                      <div className="flex items-center gap-2 text-green-600 mb-1">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span className="text-sm font-medium">Doğru Kullanım</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="text-green-600 text-2xl font-medium">
+                          {rastgeleYanlis.dogru}
+                        </div>
+                        <button
+                          onClick={() => handleCopy(rastgeleYanlis.dogru)}
+                          className="text-green-400 hover:text-green-600 transition-colors hover:bg-green-100/50 p-1 rounded-lg"
+                          title="Kopyala"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {rastgeleYanlis.aciklama && (
+                    <div className="text-base text-gray-600 bg-white/80 p-4 rounded-lg border border-orange-100/50">
+                      <span className="font-medium text-orange-700">Açıklama: </span>
+                      {rastgeleYanlis.aciklama}
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
-
-          {/* Anlam */}
-          {anlam && (
-            <div className="mt-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
-              <span className="text-sm text-gray-500 block mb-2">Anlamı</span>
-              <p className="text-sm text-gray-600">{anlam}</p>
+        ) : (
+          <div className="text-center py-12">
+            <div className="text-orange-500 font-medium">
+              Yazım yanlışı bulunamadı.
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
-        {/* Açıklama */}
-        <div className="mt-6 pt-4 border-t border-gray-100">
-          <p className="text-sm text-gray-600 leading-relaxed">{randomItem.aciklama}</p>
-        </div>
+        {/* Kopyalandı Bildirimi */}
+        {showCopied && (
+          <div className="fixed bottom-4 right-4 bg-orange-500 text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in-up">
+            Kopyalandı!
+          </div>
+        )}
       </div>
     </div>
   );
