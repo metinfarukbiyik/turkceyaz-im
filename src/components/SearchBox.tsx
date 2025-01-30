@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from 'react';
-import { searchWord, type TDKResponse } from '@/lib/tdk-api';
+import { searchWord, getAutocompleteSuggestions, type TDKResponse } from '@/lib/tdk-api';
 import WordResult from './WordResult';
 import { useDebounce } from '@/hooks/useDebounce';
 
@@ -10,24 +10,12 @@ export default function SearchBox() {
   const [results, setResults] = useState<TDKResponse[]>([]);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuggestionsLoading, setIsSuggestionsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [checkpoint, setCheckpoint] = useState<string>('');
 
   const debouncedQuery = useDebounce(query, 300);
-
-  // Basit kelime önerileri oluşturma
-  const generateSuggestions = useCallback((word: string): string[] => {
-    const suggestionList: string[] = [];
-    // Yaygın Türkçe son ekler
-    const suffixes = ['lar', 'ler', 'lık', 'lik', 'ci', 'cı', 'sız', 'siz', 'lı', 'li'];
-    
-    suffixes.forEach(suffix => {
-      suggestionList.push(word + suffix);
-    });
-
-    return suggestionList.slice(0, 5); // En fazla 5 öneri
-  }, []);
 
   const addToRecentSearches = useCallback((word: string) => {
     setRecentSearches(prev => {
@@ -52,16 +40,74 @@ export default function SearchBox() {
         addToRecentSearches(query.trim());
         setSuggestions([]);
       } else {
-        const newSuggestions = generateSuggestions(query.trim());
-        setSuggestions(newSuggestions);
+        // Sonuç bulunamadığında önerileri göster
+        const suggestions = await getAutocompleteSuggestions(query.trim());
+        setSuggestions(suggestions);
       }
-    } catch {
+    } catch (error) {
       setError('Arama sırasında bir hata oluştu. Lütfen tekrar deneyin.');
       setResults([]);
+      setSuggestions([]);
     } finally {
       setIsLoading(false);
     }
-  }, [query, addToRecentSearches, generateSuggestions]);
+  }, [query, addToRecentSearches]);
+
+  // Önerileri getir
+  const fetchSuggestions = useCallback(async (word: string) => {
+    if (!word.trim() || word.length < 2) {
+      setSuggestions([]);
+      return;
+    }
+
+    setIsSuggestionsLoading(true);
+    try {
+      const suggestions = await getAutocompleteSuggestions(word.trim());
+      setSuggestions(suggestions);
+    } catch {
+      setSuggestions([]);
+    } finally {
+      setIsSuggestionsLoading(false);
+    }
+  }, []);
+
+  // Klavye navigasyonu için
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!suggestions.length) return;
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setSelectedIndex(prev => (prev < suggestions.length - 1 ? prev + 1 : 0));
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setSelectedIndex(prev => (prev > 0 ? prev - 1 : suggestions.length - 1));
+        break;
+      case 'Enter':
+        if (selectedIndex >= 0) {
+          e.preventDefault();
+          setQuery(suggestions[selectedIndex]);
+          handleSearch();
+          setSelectedIndex(-1);
+        }
+        break;
+      case 'Escape':
+        setSuggestions([]);
+        setSelectedIndex(-1);
+        break;
+    }
+  }, [suggestions, selectedIndex, setQuery, handleSearch]);
+
+  // Öneri seçildiğinde
+  const handleSuggestionClick = useCallback((suggestion: string) => {
+    setQuery(suggestion);
+    handleSearch();
+    setSuggestions([]);
+    setSelectedIndex(-1);
+  }, [setQuery, handleSearch]);
 
   const handleRestore = useCallback(() => {
     if (checkpoint) {
@@ -78,13 +124,21 @@ export default function SearchBox() {
     }
   }, []);
 
+  // Öneriler için
+  useEffect(() => {
+    if (debouncedQuery.trim()) {
+      fetchSuggestions(debouncedQuery);
+    } else {
+      setSuggestions([]);
+    }
+  }, [debouncedQuery, fetchSuggestions]);
+
   // Otomatik arama için
   useEffect(() => {
     if (debouncedQuery.trim()) {
       handleSearch();
     } else {
       setResults([]);
-      setSuggestions([]);
     }
   }, [debouncedQuery, handleSearch]);
 
@@ -102,8 +156,10 @@ export default function SearchBox() {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder="Aradığınız kelimeyi yazın..."
           className="w-full px-4 py-3 pl-12 bg-white rounded-xl border border-orange-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-all duration-200 shadow-sm placeholder:text-orange-300 text-orange-600"
+          autoComplete="off"
         />
         <div className="absolute left-4 top-1/2 -translate-y-1/2">
           <svg
@@ -166,6 +222,34 @@ export default function SearchBox() {
             </button>
           </div>
         )}
+
+        {/* Öneriler Dropdown */}
+        {suggestions.length > 0 && query && !isLoading && (
+          <div className="absolute w-full mt-2 bg-white rounded-lg border border-orange-100 shadow-lg z-50 overflow-hidden">
+            {suggestions.map((suggestion, index) => (
+              <button
+                key={index}
+                onClick={() => handleSuggestionClick(suggestion)}
+                onMouseEnter={() => setSelectedIndex(index)}
+                className={`w-full text-left px-4 py-2.5 hover:bg-orange-50 text-gray-700 flex items-center space-x-2 transition-colors duration-150
+                  ${selectedIndex === index ? 'bg-orange-50' : ''}
+                `}
+              >
+                <svg
+                  className={`w-4 h-4 text-orange-400 ${selectedIndex === index ? 'opacity-100' : 'opacity-0'}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <span className={selectedIndex === index ? 'text-orange-600' : ''}>
+                  {suggestion}
+                </span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Son Aramalar */}
@@ -189,7 +273,7 @@ export default function SearchBox() {
         </div>
       )}
 
-      {/* Sonuçlar ve Öneriler */}
+      {/* Sonuçlar */}
       <div className="mt-6 space-y-6">
         {isLoading && (
           <div className="text-center text-orange-600 bg-orange-50 py-3 px-4 rounded-lg">
@@ -209,23 +293,6 @@ export default function SearchBox() {
           </div>
         )}
 
-        {suggestions.length > 0 && (
-          <div className="bg-orange-50 p-4 rounded-lg">
-            <h3 className="text-sm font-medium text-orange-800 mb-2">Benzer Kelimeler:</h3>
-            <div className="flex flex-wrap gap-2">
-              {suggestions.map((suggestion, index) => (
-                <button
-                  key={index}
-                  onClick={() => setQuery(suggestion)}
-                  className="px-3 py-1 text-sm bg-white text-orange-600 rounded-full border border-orange-200 hover:bg-orange-100 transition-colors duration-200"
-                >
-                  {suggestion}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
         {results.length > 0 && (
           <div className="space-y-6">
             {results.map((result) => (
@@ -236,7 +303,8 @@ export default function SearchBox() {
 
         {!isLoading && !error && query && results.length === 0 && !suggestions.length && (
           <div className="text-center text-orange-600 bg-orange-50 py-3 px-4 rounded-lg">
-            Sonuç bulunamadı.
+            <p>Sonuç bulunamadı.</p>
+            <p className="text-sm mt-1">Farklı bir kelime aramayı deneyebilirsiniz.</p>
           </div>
         )}
       </div>

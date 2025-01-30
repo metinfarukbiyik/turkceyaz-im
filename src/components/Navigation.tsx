@@ -17,6 +17,18 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Menü açıkken scroll'u engelle
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
   // Sayfa değiştiğinde menüyü kapat
   useEffect(() => {
     setIsMenuOpen(false);
@@ -67,18 +79,18 @@ export default function Navigation() {
         {/* Mobil Menü Overlay */}
         <div 
           className={`
-            fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300
-            ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+            fixed inset-0 bg-black/30 backdrop-blur-sm transition-all duration-300 z-40
+            ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
           `}
           onClick={() => setIsMenuOpen(false)}
         />
 
         {/* Mobil Menü */}
         <div className={`
-          fixed inset-y-0 right-0 w-64 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out
+          fixed inset-y-0 right-0 w-64 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50
           ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}
         `}>
-          <div className="flex flex-col p-6 h-full">
+          <div className="flex flex-col p-6 h-full overflow-y-auto">
             <div className="flex justify-end mb-8">
               <button
                 onClick={() => setIsMenuOpen(false)}

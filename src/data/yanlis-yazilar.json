@@ -8,7 +8,6 @@
     {"yanlis": "birkaçtane", "dogru": "birkaç tane", "aciklama": "'Birkaç' belgisiz sıfatı tek sözcük olarak yazılır, ancak 'tane' sözcüğü her zaman ayrı yazılır. Örnek: 'Birkaç tane elma al.'"},
     {"yanlis": "dışarıçıkmak", "dogru": "dışarı çıkmak", "aciklama": "Birleşik fiiller, yardımcı fiillerle kullanıldığında ayrı yazılır. Örnek: yardım etmek, dans etmek, dışarı çıkmak."},
     {"yanlis": "başüstüne", "dogru": "baş üstüne", "aciklama": "Kalıplaşmamış saygı ve nezaket ifadeleri ayrı yazılır. Örnek: 'Baş üstüne efendim.'"},
-    {"yanlis": "okadar", "dogru": "o kadar", "aciklama": "'O' işaret sıfatı kendinden sonraki sözcükten her zaman ayrı yazılır. Örnek: o gün, o zaman, o kadar."},
     {"yanlis": "görüşmeküzere", "dogru": "görüşmek üzere", "aciklama": "'Üzere' sözcüğü edat olarak kullanıldığında kendinden önceki sözcükten ayrı yazılır. Örnek: 'Gelmek üzere, yapmak üzere.'"},
     {"yanlis": "tabiki", "dogru": "tabii ki", "aciklama": "'Tabii' sözcüğünün doğru yazımı iki 'i' iledir ve 'ki' bağlacı her zaman ayrı yazılır. Örnek: 'Tabii ki geleceğim.'"},
     {"yanlis": "herşey", "dogru": "her şey", "aciklama": "'Her' sıfatı ile 'şey' ismi ayrı yazılır. Bu kural tüm 'her' ile başlayan sıfat tamlamalarında geçerlidir."},
