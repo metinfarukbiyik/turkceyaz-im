@@ -1,22 +1,37 @@
-# TurkceYaz.im
+# Türkçe Yazım
 
-Türkçe dilinin doğru kullanımı için kapsamlı bir web uygulaması. Yazım kuralları, noktalama işaretleri, sık yapılan hatalar ve günlük atasözleri ile Türkçeyi daha doğru kullanmanıza yardımcı olur.
+Türkçe dilbilgisi kurallarını, yazım kurallarını ve noktalama işaretlerini öğrenmek için kapsamlı bir kaynak. Bu proje, dilimizi doğru kullanmak isteyenler için modern ve kullanıcı dostu bir web uygulamasıdır.
 
 ## 🚀 Özellikler
 
-- ✍️ Sık yapılan yazım yanlışları ve doğru kullanımları
-- 📖 Günün atasözü ve anlamı
-- 🔍 TDK sözlük entegrasyonu ile kelime arama
-- 📝 Yazım kuralları rehberi
-- ❗ Noktalama işaretleri kullanım kılavuzu
+- 📝 Detaylı yazım kuralları
+- ✍️ Noktalama işaretleri kullanım rehberi
+- 📚 Atasözleri ve deyimler koleksiyonu
+- 🗺️ Türkçe öğrenim yol haritası
 - 📱 Mobil uyumlu tasarım
+- 🌙 Modern ve kullanıcı dostu arayüz
 
-## 🛠️ Teknolojiler
+## 🛠️ Kullanılan Teknolojiler
 
-- [Next.js 14](https://nextjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [TDK API](https://sozluk.gov.tr/)
+- [Next.js](https://nextjs.org/) - React tabanlı web framework
+- [TypeScript](https://www.typescriptlang.org/) - Tip güvenli JavaScript
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+
+## 🔗 Bağlantılar
+
+- [Web Sitesi](https://turkceyazim.com)
+- [GitHub](https://github.com/metinfarukbiyik/turkceyaz-im)
+
+## 📫 İletişim
+
+- E-posta: mb.metinbiyik@gmail.com
+- X (Twitter): [@_metinbiyik](https://twitter.com/_metinbiyik)
+- GitHub: [@metinfarukbiyik](https://github.com/metinfarukbiyik)
+- Web: [biyik.dev](https://biyik.dev)
+
+## 📄 Lisans
+
+Bu proje MIT lisansı altında lisanslanmıştır. Daha fazla bilgi için [LICENSE](LICENSE) dosyasına bakınız.
 
 ## 🚀 Başlangıç
 
@@ -59,20 +74,6 @@ Tarayıcınızda [http://localhost:3000](http://localhost:3000) adresini açarak
 4. Branch'inizi push edin (`git push origin feature/yeniOzellik`)
 5. Pull Request oluşturun
 
-## 📄 Lisans
-
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakınız.
-
-## 👨‍💻 Geliştirici
-
-[Metin Faruk Bıyık](https://biyik.dev)
-
-## 🙏 Teşekkürler
-
-- [TDK](https://sozluk.gov.tr/) - Türk Dil Kurumu API desteği
-- [Vercel](https://vercel.com) - Hosting ve deployment
-- Tüm katkıda bulunanlara
-
 ## 📊 Proje Durumu
 
 - Beta sürümü yayında
@@ -84,4 +85,3 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 - [Canlı Site](https://turkceyaz.im)
 - [TDK Sözlük](https://sozluk.gov.tr/)
 - [Yazım Kılavuzu](https://www.tdk.gov.tr/tdk/kurumsal/yazim-kilavuzu/)
-# turkceyaz-im

@@ -38,8 +38,8 @@ export default function YanlisYazimlar() {
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-orange-100/50 h-full">
       <div className="p-6 flex flex-col h-full">
-        {/* Başlık ve Yenileme Butonu */}
-        <div className="flex items-center justify-between mb-6">
+        {/* Başlık */}
+        <div className="flex items-center mb-6">
           <div className="flex items-center gap-3">
             <div className="bg-orange-100 p-2 rounded-xl">
               <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -55,17 +55,6 @@ export default function YanlisYazimlar() {
               </p>
             </div>
           </div>
-          
-          {/* Yenileme Butonu */}
-          <button
-            onClick={yeniYanlisGetir}
-            className="p-2 hover:bg-orange-50 text-orange-600 rounded-xl border border-orange-200 transition-colors"
-            title="Yeni Yazım Yanlışı Göster"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-            </svg>
-          </button>
         </div>
 
         {/* Yazım Yanlışı Kartı */}

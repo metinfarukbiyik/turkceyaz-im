@@ -10,9 +10,26 @@ export default function SearchBox() {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [searchResults, setSearchResults] = useState<TDKResponse[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const searchBoxRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const debouncedQuery = useDebounce(searchTerm, 300);
+
+  // Dışa tıklanma kontrolü
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchBoxRef.current && !searchBoxRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+        setSuggestions([]);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleSearch = useCallback(async () => {
     if (!searchTerm.trim()) return;
@@ -23,6 +40,7 @@ export default function SearchBox() {
       setSearchResults(results);
     } finally {
       setIsLoading(false);
+      setShowSuggestions(false);
     }
   }, [searchTerm]);
 
@@ -30,14 +48,17 @@ export default function SearchBox() {
   const fetchSuggestions = useCallback(async (word: string) => {
     if (!word.trim() || word.length < 2) {
       setSuggestions([]);
+      setShowSuggestions(false);
       return;
     }
 
     try {
       const suggestions = await getAutocompleteSuggestions(word.trim());
       setSuggestions(suggestions);
+      setShowSuggestions(suggestions.length > 0);
     } catch {
       setSuggestions([]);
+      setShowSuggestions(false);
     }
   }, []);
 
@@ -62,11 +83,13 @@ export default function SearchBox() {
           setSearchTerm(suggestions[selectedIndex]);
           handleSearch();
           setSelectedIndex(-1);
+          setShowSuggestions(false);
         }
         break;
       case 'Escape':
         setSuggestions([]);
         setSelectedIndex(-1);
+        setShowSuggestions(false);
         break;
     }
   }, [suggestions, selectedIndex, setSearchTerm, handleSearch]);
@@ -77,6 +100,7 @@ export default function SearchBox() {
     handleSearch();
     setSuggestions([]);
     setSelectedIndex(-1);
+    setShowSuggestions(false);
   }, [setSearchTerm, handleSearch]);
 
   // Öneriler için
@@ -85,6 +109,7 @@ export default function SearchBox() {
       fetchSuggestions(debouncedQuery);
     } else {
       setSuggestions([]);
+      setShowSuggestions(false);
     }
   }, [debouncedQuery, fetchSuggestions]);
 
@@ -120,10 +145,12 @@ export default function SearchBox() {
         <div className="relative mb-8">
           <div className="relative">
             <input
+              ref={searchInputRef}
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyDown={handleKeyDown}
+              onFocus={() => setShowSuggestions(suggestions.length > 0)}
               placeholder="Türkçe Sözlük&apos;te Ara..."
               className="w-full px-4 py-4 pl-12 bg-white rounded-2xl border border-orange-200 focus:border-orange-500 focus:ring-4 focus:ring-orange-100 transition-all duration-200 shadow-sm placeholder:text-orange-300 text-gray-700 text-lg"
               autoComplete="off"
@@ -193,7 +220,7 @@ export default function SearchBox() {
           </div>
 
           {/* Öneriler Dropdown */}
-          {suggestions.length > 0 && searchTerm && !isLoading && (
+          {showSuggestions && suggestions.length > 0 && !isLoading && (
             <div className="absolute w-full mt-2 bg-white rounded-xl border border-orange-100 shadow-lg z-[60] overflow-hidden">
               {suggestions.map((suggestion, index) => (
                 <button

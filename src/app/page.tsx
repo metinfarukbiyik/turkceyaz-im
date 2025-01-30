@@ -77,10 +77,10 @@ export default function Home() {
         {/* Başlık */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-orange-400 via-orange-300 to-orange-400 bg-clip-text text-transparent">
-            Doğru Türkçe Kullanımı
+            Türkçenin İnceliklerini Keşfedin
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Türkçeyi doğru ve etkili kullanmanın püf noktaları. Dilimizi en doğru şekilde kullanmak için ihtiyacınız olan tüm bilgiler burada.
+            Türkçenin zenginliklerini keşfedin, dilinizi güçlendirin. TDK standartlarına uygun, doğru ve etkili Türkçe kullanımı için kapsamlı rehberiniz.
           </p>
         </div>
 
