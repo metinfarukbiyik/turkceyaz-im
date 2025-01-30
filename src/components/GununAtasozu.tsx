@@ -76,6 +76,7 @@ export default function GununAtasozu() {
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-orange-100/50 h-full">
       <div className="p-6 flex flex-col h-full">
+        {/* Başlık */}
         <div className="flex items-center gap-3 mb-6">
           <div className="bg-orange-100 p-2 rounded-xl">
             <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,27 +92,37 @@ export default function GununAtasozu() {
             </p>
           </div>
         </div>
-        
+
         {/* Atasözü ve Anlam */}
         <div className="flex-grow">
-          {/* Atasözü */}
-          <div className="p-6 bg-orange-50 rounded-xl border border-orange-100 mb-4 text-center">
-            <p className="text-2xl text-orange-600 font-medium leading-relaxed">
-              &quot;{atasozu.soz}&quot;
-            </p>
-          </div>
+          <div className="bg-orange-50/50 rounded-xl border border-orange-100 overflow-hidden hover:shadow-md transition-shadow">
+            <div className="p-6">
+              <div className="flex flex-col gap-4">
+                {/* Tür Etiketi */}
+                <div className="text-sm px-3 py-1 rounded-full bg-orange-100 text-orange-700 font-medium self-end">
+                  {atasozu.turu || 'Atasözü'}
+                </div>
 
-          {/* Anlam */}
-          <div className="p-6 bg-blue-50 rounded-xl border border-blue-100">
-            <div className="flex items-center gap-2 mb-3">
-              <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span className="text-sm text-blue-600">Anlamı</span>
+                {/* Atasözü */}
+                <div className="bg-orange-50/50 p-4 rounded-xl border border-orange-100">
+                  <div className="flex items-center gap-2 text-orange-600 mb-1">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span className="text-sm font-medium">Atasözü</span>
+                  </div>
+                  <div className="text-orange-600 text-2xl font-medium">
+                    {atasozu.soz}
+                  </div>
+                </div>
+
+                {/* Anlam */}
+                <div className="text-base text-gray-600 bg-white/80 p-4 rounded-lg border border-orange-100/50">
+                  <span className="font-medium text-orange-700">Anlamı: </span>
+                  {atasozu.anlam}
+                </div>
+              </div>
             </div>
-            <p className="text-blue-700 leading-relaxed">
-              {atasozu.anlam}
-            </p>
           </div>
         </div>
       </div>
