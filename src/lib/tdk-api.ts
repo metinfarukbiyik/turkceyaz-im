@@ -1,4 +1,4 @@
-import { TDK_ENDPOINTS, API_PARAMS, TDKResponse, AtasozuDeyimResponse } from './tdk-endpoints';
+import { TDK_ENDPOINTS, API_PARAMS, TDKResponse } from './tdk-endpoints';
 import { load } from 'cheerio';
 
 // Yazım yanlışları için tip tanımlaması

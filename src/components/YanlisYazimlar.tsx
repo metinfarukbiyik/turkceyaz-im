@@ -2,9 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { 
-  YazimYanlisiKategori, 
   getSikcaYapilanYanlislar,
-  getKategoriIstatistikleri,
   getKategori,
   type YanlisKullanimResponse 
 } from '@/lib/tdk-api';
@@ -53,7 +51,7 @@ export default function YanlisYazimlar() {
                 Sıkça Yapılan Yazım Yanlışları
               </h2>
               <p className="text-sm text-orange-500 mt-0.5">
-                Türk Dil Kurumu Sözlüğü'nden
+                Türk Dil Kurumu Sözlüğü&apos;nden
               </p>
             </div>
           </div>
