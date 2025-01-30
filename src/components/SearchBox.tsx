@@ -10,12 +10,11 @@ export default function SearchBox() {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [searchResults, setSearchResults] = useState<TDKResponse[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [showSuggestions, setShowSuggestions] = useState(false);
   const searchBoxRef = useRef<HTMLDivElement>(null);
 
   const debouncedQuery = useDebounce(searchTerm, 300);
 
-  const handleSearch = async () => {
+  const handleSearch = useCallback(async () => {
     if (!searchTerm.trim()) return;
     
     setIsLoading(true);
@@ -24,9 +23,8 @@ export default function SearchBox() {
       setSearchResults(results);
     } finally {
       setIsLoading(false);
-      setShowSuggestions(false);
     }
-  };
+  }, [searchTerm]);
 
   // Önerileri getir
   const fetchSuggestions = useCallback(async (word: string) => {
@@ -126,7 +124,7 @@ export default function SearchBox() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Türkçe Sözlük'te Ara..."
+              placeholder="Türkçe Sözlük&apos;te Ara..."
               className="w-full px-4 py-4 pl-12 bg-white rounded-2xl border border-orange-200 focus:border-orange-500 focus:ring-4 focus:ring-orange-100 transition-all duration-200 shadow-sm placeholder:text-orange-300 text-gray-700 text-lg"
               autoComplete="off"
             />
@@ -230,7 +228,7 @@ export default function SearchBox() {
               <div>
                 <h2 className="text-2xl font-bold text-gray-800 mb-1">{searchTerm}</h2>
                 <p className="text-sm text-gray-500">
-                  Türk Dil Kurumu Sözlüğü'nde bulunan anlamlar
+                  Türk Dil Kurumu Sözlüğü&apos;nde bulunan anlamlar
                 </p>
               </div>
               <div className="text-sm text-orange-600 bg-orange-50 px-3 py-1 rounded-full">
@@ -271,7 +269,7 @@ export default function SearchBox() {
               </div>
               <h3 className="text-lg font-medium text-gray-900 mb-2">Sonuç Bulunamadı</h3>
               <p className="text-gray-500">
-                "{searchTerm}" için sözlükte bir sonuç bulunamadı.<br />
+                &quot;{searchTerm}&quot; için sözlükte bir sonuç bulunamadı.<br />
                 Farklı bir kelime aramayı deneyebilirsiniz.
               </p>
             </div>

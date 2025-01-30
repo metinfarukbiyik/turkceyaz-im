@@ -97,7 +97,7 @@ export default function GununAtasozu() {
           {/* Atasözü */}
           <div className="p-6 bg-orange-50 rounded-xl border border-orange-100 mb-4 text-center">
             <p className="text-2xl text-orange-600 font-medium leading-relaxed">
-              "{atasozu.soz}"
+              &quot;{atasozu.soz}&quot;
             </p>
           </div>
 

@@ -1,8 +1,8 @@
-import { TDK_ENDPOINTS, API_PARAMS, TDKResponse } from './tdk-endpoints';
-import { load } from 'cheerio';
+import { TDK_ENDPOINTS, API_PARAMS, TDKResponse, YanlisKullanimResponse } from './tdk-endpoints';
 
 // Yazım yanlışları için tip tanımlaması
 export type { YanlisKullanimResponse } from './tdk-endpoints';
+export type { TDKResponse } from './tdk-endpoints';
 
 // Türkçe karakterleri normalize etme fonksiyonu
 function normalizeText(text: string): string {
